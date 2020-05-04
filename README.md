@@ -2,6 +2,8 @@
 
 Managing mounts.
 
+[![Build Status](https://travis-ci.org/Caseraw/ansible_role_mountmanager.svg?branch=master)](https://travis-ci.org/Caseraw/ansible_role_mountmanager) [<img src="https://img.shields.io/ansible/role/46849">](https://galaxy.ansible.com/caseraw/ansible_role_mountmanager) [<img src="https://img.shields.io/ansible/role/d/46849">](https://galaxy.ansible.com/caseraw/ansible_role_mountmanager) [<img src="https://img.shields.io/ansible/quality/46849">](https://galaxy.ansible.com/caseraw/ansible_role_mountmanager)
+
 - [Ansible role mounts](#ansible-role-mounts)
   - [License](#license)
   - [Author Information](#author-information)
@@ -139,6 +141,6 @@ This role uses [Travis CI](https://travis-ci.org/) to run online tests with the 
 
 ## Useful links
 
-- GitHub repository: <https://github.com/Caseraw/ansible_role_postfix>
-- Travis CI build status: <https://travis-ci.org/Caseraw/ansible_role_postfix>
-- Ansible Galaxy role: <https://galaxy.ansible.com/caseraw/ansible_role_postfix>
+- GitHub repository: <https://github.com/Caseraw/ansible_role_mountmanager>
+- Travis CI build status: <https://travis-ci.org/Caseraw/ansible_role_mountmanager>
+- Ansible Galaxy role: <https://galaxy.ansible.com/caseraw/ansible_role_mountmanager>
