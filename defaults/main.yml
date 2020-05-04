@@ -1,0 +1,67 @@
+---
+### Define a list of mounts
+##
+## For better maintainability, the list is built during runtime by
+## combining all lists together. This will provide the freedom of declaring
+## custom group lists for granular control. The lists require a naming
+## convention by using a pattern. The pattern is rendered as a single list
+## which can be used for iteration with variable: 'role_mountmanager_list'
+## The list name pattern needs to start with: 'role_mountmanager_list_'
+##
+## Types of mounts:
+## - nfs
+## - cifs
+## - autofs
+
+role_mountmanager_list_default: []
+
+## Example of a list for default inheritance:
+# role_mountmanager_list_default:
+#   - type: nfs
+#     state: mounted
+#     src: 192.168.122.201:/srv/nfsexports
+#     path: /srv/nfsmounts
+#     fstype: nfs
+#     opts: defaults,sync
+#     path_owner: root
+#     path_group: radix
+#     path_mode: '0770'
+#   - type: cifs
+#     state: mounted
+#     src: //192.168.122.201/smbexports
+#     path: /srv/smbmounts
+#     fstype: cifs
+#     opts: defaults,noperm,credentials=/root/creds.txt
+#     path_owner: root
+#     path_group: root
+#     path_mode: '0775'
+#   - type: autofs
+#     state: present
+#     path: /srv/autofs
+#     path_owner: root
+#     path_group: root
+#     path_mode: '0755'
+#     master_file: /etc/auto.master.d/autofsexports.autofs
+#     master_file_owner: root
+#     master_file_group: root
+#     master_file_mode: '0640'
+#     master_params:
+#       - /srv/autofs /etc/auto.autofsexports
+#     map_file: /etc/auto.autofsexports
+#     map_file_owner: root
+#     map_file_group: root
+#     map_file_mode: '0640'
+#     map_params:
+#       - autofsexports -fstype=nfs,rw,soft,intr 192.168.122.201:/srv/autofsexports
+#       - autofsexports2 -fstype=nfs,rw,soft,intr 192.168.122.201:/srv/autofsexports2
+
+### Required packages that need to be installed based on the mount type.
+role_mountmanager_required_packages:
+  nfs:
+    - nfs-utils
+  cifs:
+    - cifs-utils
+  autofs:
+    - autofs
+
+...

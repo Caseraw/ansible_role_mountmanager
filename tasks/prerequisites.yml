@@ -1,0 +1,15 @@
+---
+- name: Populate mounts list
+  set_fact:
+    role_mountmanager_list: '{{ role_mountmanager_list | default([]) + vars[item] }}'
+  loop: "{{ vars.keys() | select('match', '^role_mountmanager_list_.*$') | list }}"
+
+- name: Populate package list
+  set_fact:
+    role_mountmanager_required_package_list: '{{ role_mountmanager_required_package_list | default([]) + role_mountmanager_required_packages[item.type] }}'
+  loop: '{{ role_mountmanager_list }}'
+
+- name: Get autofs service state
+  service_facts:
+
+...

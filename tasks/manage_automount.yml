@@ -1,0 +1,68 @@
+---
+- name: Create automount master configuration files
+  template:
+    src: master_conf.j2
+    dest: '{{ item.master_file }}'
+    owner: '{{ item.master_file_owner }}'
+    group: '{{ item.master_file_group }}'
+    mode: '{{ item.master_file_mode }}'
+  loop: '{{ role_mountmanager_list }}'
+  notify: autofs_enable_restart
+  when:
+    - item.type == 'autofs'
+    - item.state == 'present'
+
+- name: Create automount map configuration files
+  template:
+    src: map_conf.j2
+    dest: '{{ item.map_file }}'
+    owner: '{{ item.map_file_owner }}'
+    group: '{{ item.map_file_group }}'
+    mode: '{{ item.map_file_mode }}'
+  loop: '{{ role_mountmanager_list }}'
+  notify: autofs_enable_restart
+  when:
+    - item.type == 'autofs'
+    - item.state == 'present'
+
+- name: Ensure autofs is stopped and disabled before cleanup if required
+  systemd:
+    name: autofs
+    state: stopped
+    enabled: False
+  when:
+    - ansible_facts.services["autofs.service"] is defined
+    - ansible_facts.services["autofs.service"].state == 'running'
+    - ansible_facts.services["autofs.service"].status == 'enabled'
+
+- name: Cleanup autofs master files if required
+  file:
+    state: absent
+    path: '{{ item.master_file }}'
+  loop: '{{ role_mountmanager_list }}'
+  notify: autofs_disable_stop
+  when:
+    - item.type == 'autofs'
+    - item.state == 'absent'
+
+- name: Cleanup autofs map files if required
+  file:
+    state: absent
+    path: '{{ item.map_file }}'
+  loop: '{{ role_mountmanager_list }}'
+  notify: autofs_disable_stop
+  when:
+    - item.type == 'autofs'
+    - item.state == 'absent'
+
+- name: Cleanup autofs mount/map base directory if required
+  file:
+    state: absent
+    path: '{{ item.path }}'
+  loop: '{{ role_mountmanager_list }}'
+  notify: autofs_disable_stop
+  when:
+    - item.type == 'autofs'
+    - item.state == 'absent'
+
+...

@@ -1,0 +1,16 @@
+---
+- name: Ensure autofs is started/restarted and enabled
+  systemd:
+    name: autofs
+    state: restarted
+    enabled: True
+  listen: autofs_enable_restart
+
+- name: Ensure autofs is stopped and disabled
+  systemd:
+    name: autofs
+    state: stopped
+    enabled: False
+  listen: autofs_disable_stop
+
+...

@@ -1,0 +1,5 @@
+# {{ ansible_managed }}
+
+{% for parameter in item.master_params | default([]) %}
+{{ parameter }}
+{% endfor %}

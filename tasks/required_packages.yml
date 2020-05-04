@@ -1,0 +1,7 @@
+---
+- name: Install required packages
+  yum:
+    name: '{{ role_mountmanager_required_package_list | default([]) | unique }}'
+    state: present
+
+...

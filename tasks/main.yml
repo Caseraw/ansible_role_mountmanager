@@ -1,0 +1,25 @@
+---
+- name: Import prerequisite tasks
+  import_tasks: prerequisites.yml
+  tags:
+    - tag_role_mountmanager_prerequisites
+    - tag_role_mountmanager_required_packages
+    - tag_role_mountmanager_manage_mounts
+    - tag_role_mountmanager_manage_automount
+
+- name: Import required packages tasks
+  import_tasks: required_packages.yml
+  tags:
+    - tag_role_mountmanager_required_packages
+
+- name: Import manage mounts tasks
+  import_tasks: manage_mounts.yml
+  tags:
+    - tag_role_mountmanager_manage_mounts
+
+- name: Import manage automount tasks
+  import_tasks: manage_automount.yml
+  tags:
+    - tag_role_mountmanager_manage_automount
+
+...

@@ -1,0 +1,33 @@
+---
+galaxy_info:
+  author: Kasra Amirsarvari
+  description: Manage mounts.
+  company: N/A
+  license: license (BSD, MIT)
+  min_ansible_version: 2.5
+  platforms:
+    - name: Fedora
+      versions:
+        - 30
+        - 31
+    - name: EL
+      versions:
+        - 7
+        - 8
+  galaxy_tags:
+    - mount
+    - mounts
+    - directory
+    - directroies
+    - cdrom
+    - iso
+    - nfs
+    - cifs
+    - autofs
+    - network
+    - share
+    - shares
+
+dependencies: []
+
+...

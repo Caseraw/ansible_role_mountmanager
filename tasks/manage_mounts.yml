@@ -1,0 +1,32 @@
+---
+- name: Mange mount points
+  file:
+    state: directory
+    path: '{{ item.path }}'
+    mode: '{{ item.path_mode | default(omit) }}'
+    owner: '{{ item.path_owner | default(omit) }}'
+    group: '{{ item.path_group | default(omit) }}'
+  loop: '{{ role_mountmanager_list }}'
+  when:
+    - (item.state == 'present') or
+      (item.state == 'mounted') or
+      (item.state == 'remounted')
+
+- name: Manage mounts
+  mount:
+    state: '{{ item.state }}'
+    src: '{{ item.src | default(omit) }}'
+    path: '{{ item.path }}'
+    fstype: '{{ item.fstype | default(omit) }}'
+    opts: '{{ item.opts | default(omit) }}'
+    boot: '{{ item.boot | default(omit) }}'
+    dump: '{{ item.dump | default(omit) }}'
+    fstab: '{{ item.fstab | default(omit) }}'
+    passno: '{{ item.passno | default(omit) }}'
+    backup: '{{ item.backup | default(omit) }}'
+  loop: '{{ role_mountmanager_list }}'
+  when:
+    - (item.type == 'nfs') or
+      (item.type == 'cifs')
+
+...
