@@ -63,5 +63,6 @@ role_mountmanager_required_packages:
     - cifs-utils
   autofs:
     - autofs
+  system: []
 
 ...

@@ -27,6 +27,7 @@
   loop: '{{ role_mountmanager_list }}'
   when:
     - (item.type == 'nfs') or
-      (item.type == 'cifs')
+      (item.type == 'cifs') or
+      (item.type == 'system')
 
 ...

@@ -67,9 +67,9 @@ Compatible with the following list of operating systems:
   gather_facts: False
   tasks:
     - import_role:
-        name: ansible_role_mounts
+        name: ansible_role_mountmanager
       vars:
-        role_mounts_list_default:
+        role_mountmanager_list_default:
           - type: nfs
             state: mounted
             src: 192.168.122.201:/srv/nfsexports
@@ -107,6 +107,14 @@ Compatible with the following list of operating systems:
             map_params:
               - autofsexports -fstype=nfs,rw,soft,intr 192.168.122.201:/srv/autofsexports
               - autofsexports2 -fstype=nfs,rw,soft,intr 192.168.122.201:/srv/autofsexports2
+          - type: system
+            state: present
+            src: /dev/mapper/rhel-tmp
+            path: /tmp
+            fstype: xfs
+            opts: defaults,nodev,noexec,nosuid
+            dump: '0'
+            passno: '0'
         role_mounts_required_packages:
           nfs:
               - nfs-utils
@@ -114,6 +122,7 @@ Compatible with the following list of operating systems:
               - cifs-utils
           autofs:
               - autofs
+          system: []
 
 ...
 ```
